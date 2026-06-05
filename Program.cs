@@ -41,6 +41,7 @@ Console.WriteLine($"Status Sekarang : {complaint.Status}");
 
 Console.WriteLine("\n=== Menjalankan Performance Test ===");
 PerformanceTest.Run();
+GenericsPerformanceTest.Run();
 Console.WriteLine("\nSimulasi program selesai.\n");
 
 app.Run();
