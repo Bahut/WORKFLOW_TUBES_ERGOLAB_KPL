@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using TUBES_KPL.Core;
-using TUBES_KPL.Models;
+using WORKFLOW_TUBES_KPL_ERGOLAB.Core;
+using WORKFLOW_TUBES_KPL_ERGOLAB.Models;
 
-namespace TUBES_KPL.Core
+namespace WORKFLOW_TUBES_KPL_ERGOLAB.Core
 {
     public class Result<T>
     {

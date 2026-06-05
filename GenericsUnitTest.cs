@@ -1,10 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using TUBES_KPL.Core;
-using TUBES_KPL.Models;
+using WORKFLOW_TUBES_KPL_ERGOLAB.Core;
+using WORKFLOW_TUBES_KPL_ERGOLAB.Models;
 
-namespace TUBES_KPL.Testing
+namespace WORKFLOW_TUBES_KPL_ERGOLAB.Testing
 {
 	[TestClass]
 	public class GenericsTest
@@ -12,7 +12,8 @@ namespace TUBES_KPL.Testing
 		[TestMethod]
 		public void Result_Ok_ReturnsSuccess()
 		{
-			var complaint = new Complaint("Jalan rusak", "Infrastruktur", "Berat", "Berlubang", "Bandung", "Budi");
+			// Ubah jadi 5 argumen
+			var complaint = new Complaint("Jalan rusak", "Infrastruktur", "Berlubang", "Bandung", "Budi");
 			var result = Result<Complaint>.Ok(complaint, "Berhasil");
 			Assert.IsTrue(result.Success);
 			Assert.IsNotNull(result.Data);
@@ -46,7 +47,8 @@ namespace TUBES_KPL.Testing
 		{
 			var items = new List<Complaint>
 			{
-				new Complaint("Sampah", "Kebersihan", "Ringan", "Menumpuk", "Surabaya", "Siti")
+				// Ubah jadi 5 argumen
+				new Complaint("Sampah", "Kebersihan", "Menumpuk", "Surabaya", "Siti")
 			};
 			var paged = new PagedList<Complaint>(items, 1, 10, 1);
 			Assert.AreEqual(1, paged.Page);
@@ -120,7 +122,8 @@ namespace TUBES_KPL.Testing
 		public void ComplaintRepository_AddAndGet_Works()
 		{
 			var repo = new ComplaintRepository();
-			var c = new Complaint("Banjir", "Infrastruktur", "Berat", "Meluap", "Jakarta", "Andi");
+			// Ubah jadi 5 argumen
+			var c = new Complaint("Banjir", "Infrastruktur", "Meluap", "Jakarta", "Andi");
 			repo.Add(c);
 			var result = repo.GetById(0);
 			Assert.AreEqual("Banjir", result.Title);

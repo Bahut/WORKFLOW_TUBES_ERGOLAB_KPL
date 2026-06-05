@@ -1,8 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using TUBES_KPL;
+using WORKFLOW_TUBES_KPL_ERGOLAB.Core; // Diarahkan ke namespace Core tempat InputValidatorAndFormatter lo berada
 
-namespace ERGOLAB_KPL.Tests
+namespace WORKFLOW_TUBES_KPL_ERGOLAB.Testing
 {
     [TestClass]
     public class InputValidatorAndFormatterTests
