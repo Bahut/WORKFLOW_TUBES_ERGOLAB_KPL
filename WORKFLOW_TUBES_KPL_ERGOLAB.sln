@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11620.152
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WORKFLOW_TUBES_KPL_ERGOLAB", "WORKFLOW_TUBES_KPL_ERGOLAB.csproj", "{FB4DBBBD-68C9-A920-ED97-3C5F23F7989D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigLoaderPerformanceTest", "ConfigLoaderPerformanceTest\ConfigLoaderPerformanceTest.csproj", "{4D1C4D1C-C3FE-47C5-A292-4715DC9669D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB4DBBBD-68C9-A920-ED97-3C5F23F7989D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB4DBBBD-68C9-A920-ED97-3C5F23F7989D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB4DBBBD-68C9-A920-ED97-3C5F23F7989D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB4DBBBD-68C9-A920-ED97-3C5F23F7989D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D1C4D1C-C3FE-47C5-A292-4715DC9669D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D1C4D1C-C3FE-47C5-A292-4715DC9669D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D1C4D1C-C3FE-47C5-A292-4715DC9669D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D1C4D1C-C3FE-47C5-A292-4715DC9669D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E692289B-0DF3-4E07-9BBA-8757BA33B78E}
+	EndGlobalSection
+EndGlobal
