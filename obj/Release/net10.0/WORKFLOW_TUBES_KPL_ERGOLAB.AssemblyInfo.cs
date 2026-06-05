@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WORKFLOW_TUBES_KPL_ERGOLAB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3e440d8c033779fb96f6e85852af997204e791e6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9878b89c4ab17f5a2e8716e51137d637aad391fc")]
 [assembly: System.Reflection.AssemblyProductAttribute("WORKFLOW_TUBES_KPL_ERGOLAB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WORKFLOW_TUBES_KPL_ERGOLAB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
