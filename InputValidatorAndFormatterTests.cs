@@ -1,32 +1,45 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using TUBES_KPL;
 
-namespace ERGOLAB_KPL
+namespace ERGOLAB_KPL.Tests
 {
-	public class InputValidatorAndFormatterTest
-	{
-		private readonly InputValidatorAndFormatter _helper = new InputValidatorAndFormatter();
+    [TestClass]
+    public class InputValidatorAndFormatterTests
+    {
+        private InputValidatorAndFormatter _helper;
 
-		public void JalankanSemuaTest()
-		{
-			Console.WriteLine("=== Menjalankan Simulasi Validasi ===");
+        [TestInitialize]
+        public void Setup()
+        {
+            _helper = new InputValidatorAndFormatter();
+        }
 
-			bool testTelp = _helper.ValidateNoTelp("081234567890");
-			Console.WriteLine($"Test No Telp (081234567890): {(testTelp ? "BERHASIL" : "GAGAL")}");
+        [TestMethod]
+        public void Test_ValidateNoTelp_Valid()
+        {
+            Assert.IsTrue(_helper.ValidateNoTelp("081234567890"));
+        }
 
-			bool testNik = _helper.ValidateNIK("3273012345678901");
-			Console.WriteLine($"Test NIK (3273012345678901): {(testNik ? "BERHASIL" : "GAGAL")}");
+        [TestMethod]
+        public void Test_ValidateNIK_Valid()
+        {
+            Assert.IsTrue(_helper.ValidateNIK("3273012345678901"));
+        }
 
-			try
-			{
-				_helper.SamarkanNamaPelapor("");
-				Console.WriteLine("Test Enkripsi Nama Kosong: GAGAL (Tidak melempar eror)");
-			}
-			catch (ArgumentException)
-			{
-				Console.WriteLine("Test Enkripsi Nama Kosong: BERHASIL (Eror tertangkap)");
-			}
+        [TestMethod]
+        public void Test_SamarkanNama_EmptyInput_ThrowsException()
+        {
+            try
+            {
+                _helper.SamarkanNamaPelapor("");
 
-			Console.WriteLine("=====================================");
-		}
-	}
+                Assert.Fail("Harusnya melempar ArgumentException tetapi tidak.");
+            }
+            catch (ArgumentException)
+            {
+                return;
+            }
+        }
+    }
 }
