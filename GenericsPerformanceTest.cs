@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using TUBES_KPL.Core;
-using TUBES_KPL.Models;
+using WORKFLOW_TUBES_KPL_ERGOLAB.Core;
+using WORKFLOW_TUBES_KPL_ERGOLAB.Models;
 
-namespace TUBES_KPL.Testing
+namespace WORKFLOW_TUBES_KPL_ERGOLAB.Testing
 {
     public class GenericsPerformanceTest
     {
@@ -16,7 +16,8 @@ namespace TUBES_KPL.Testing
             ComplaintRepository repo = new ComplaintRepository();
             for (int i = 0; i < 1000; i++)
             {
-                Complaint c = new Complaint($"Pengaduan {i}", "Kebersihan", "Ringan", $"Deskripsi {i}", "Bandung", "Warga");
+                // Disesuaikan jadi 5 argumen sesuai constructor Complaint lo
+                Complaint c = new Complaint($"Pengaduan {i}", "Kebersihan", $"Deskripsi {i}", "Bandung", "Warga");
                 repo.Add(c);
             }
             sw.Stop();
@@ -40,7 +41,8 @@ namespace TUBES_KPL.Testing
             sw.Restart();
             for (int i = 0; i < 1000; i++)
             {
-                Complaint c = new Complaint($"Judul {i}", "Keamanan", "Berat", $"Desc {i}", "Medan", "User");
+                // Disesuaikan jadi 5 argumen
+                Complaint c = new Complaint($"Judul {i}", "Keamanan", $"Desc {i}", "Medan", "User");
                 Result<Complaint> result = Result<Complaint>.Ok(c, "OK");
             }
             sw.Stop();

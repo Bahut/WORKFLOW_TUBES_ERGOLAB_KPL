@@ -3,7 +3,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
 
-namespace ERGOLAB_KPL
+namespace WORKFLOW_TUBES_KPL_ERGOLAB.Core
 {
     public class InputValidatorAndFormatter
     {

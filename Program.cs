@@ -29,19 +29,33 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
-Console.WriteLine("=== LurahOnline (ErgoLab Version) ===");
+Console.WriteLine("=== Sistem Pengaduan LurahOnline");
 Console.WriteLine("Pengelolaan Status Komplain\n");
 
 Complaint complaint = new Complaint("Jalan Rusak", "Infrastruktur", "Jalan berlubang", "Jl. Merdeka No.10", "warga123");
-ComplaintWorkflow workflow = new ComplaintWorkflow();
 
+ComplaintWorkflow workflow = new ComplaintWorkflow();
 Console.WriteLine($"Status Awal     : {complaint.Status}");
 workflow.ChangeStatus(complaint, "verify");
 Console.WriteLine($"Status Sekarang : {complaint.Status}");
 
+//  TABLE-DRIVEN MATRIX 
+Console.WriteLine("\n=== Menjalankan Metode Table-Driven ===");
+ComplaintSlaTable rules = new ComplaintSlaTable();
+string kategori = complaint.Category;
+string tingkatKeparahan = "Berat";
+
+int slaDays = rules.GetSLADays(kategori, tingkatKeparahan);
+string unitTujuan = rules.GetUnit(kategori, tingkatKeparahan);
+Console.WriteLine($"Kategori Komplain  : {kategori} ({tingkatKeparahan})");
+Console.WriteLine($"Diserahkan Ke      : {unitTujuan}");
+Console.WriteLine($"Estimasi SLA       : {slaDays} Hari");
+
 Console.WriteLine("\n=== Menjalankan Performance Test ===");
 PerformanceTest.Run();
 GenericsPerformanceTest.Run();
+TableDrivenPerformanceTest.Run(); 
+
 Console.WriteLine("\nSimulasi program selesai.\n");
 
 app.Run();
