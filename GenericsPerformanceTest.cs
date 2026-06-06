@@ -16,7 +16,6 @@ namespace WORKFLOW_TUBES_KPL_ERGOLAB.Testing
             ComplaintRepository repo = new ComplaintRepository();
             for (int i = 0; i < 1000; i++)
             {
-                // Disesuaikan jadi 5 argumen sesuai constructor Complaint lo
                 Complaint c = new Complaint($"Pengaduan {i}", "Kebersihan", $"Deskripsi {i}", "Bandung", "Warga");
                 repo.Add(c);
             }
@@ -41,7 +40,6 @@ namespace WORKFLOW_TUBES_KPL_ERGOLAB.Testing
             sw.Restart();
             for (int i = 0; i < 1000; i++)
             {
-                // Disesuaikan jadi 5 argumen
                 Complaint c = new Complaint($"Judul {i}", "Keamanan", $"Desc {i}", "Medan", "User");
                 Result<Complaint> result = Result<Complaint>.Ok(c, "OK");
             }
