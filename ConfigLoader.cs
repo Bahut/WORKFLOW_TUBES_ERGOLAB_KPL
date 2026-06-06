@@ -1,31 +1,40 @@
 ﻿using System.Text.Json;
-namespace WORKFLOW_TUBES_KPL_ERGOLAB.Core;
 
-public static class ConfigLoader
+namespace WORKFLOW_TUBES_KPL_ERGOLAB.Config
 {
-    public static T Load<T>(string filePath)
+    public static class ConfigLoader
     {
-        if (!File.Exists(filePath))
+        public static T Load<T>(string filePath)
         {
-            throw new FileNotFoundException(
-                $"Config file tidak ditemukan: {filePath}");
-        }
+            string fullPath = Path.IsPathRooted(filePath)
+                ? filePath
+                : Path.GetFullPath(
+                    Path.Combine(
+                        AppDomain.CurrentDomain.BaseDirectory,
+                        filePath));
 
-        string json = File.ReadAllText(filePath);
-
-        T? result = JsonSerializer.Deserialize<T>(
-            json,
-            new JsonSerializerOptions
+            if (!File.Exists(fullPath))
             {
-                PropertyNameCaseInsensitive = true
-            });
+                throw new FileNotFoundException(
+                    $"Config file tidak ditemukan: {fullPath}");
+            }
 
-        if (result == null)
-        {
-            throw new Exception(
-                $"Gagal membaca konfigurasi: {filePath}");
+            string json = File.ReadAllText(fullPath);
+
+            T? result = JsonSerializer.Deserialize<T>(
+                json,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+            if (result == null)
+            {
+                throw new Exception(
+                    $"Gagal membaca konfigurasi: {fullPath}");
+            }
+
+            return result;
         }
-
-        return result;
     }
 }

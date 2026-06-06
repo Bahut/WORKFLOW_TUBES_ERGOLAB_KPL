@@ -5,7 +5,7 @@ VisualStudioVersion = 18.4.11620.152
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WORKFLOW_TUBES_KPL_ERGOLAB", "WORKFLOW_TUBES_KPL_ERGOLAB.csproj", "{FB4DBBBD-68C9-A920-ED97-3C5F23F7989D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigLoaderPerformanceTest", "ConfigLoaderPerformanceTest\ConfigLoaderPerformanceTest.csproj", "{4D1C4D1C-C3FE-47C5-A292-4715DC9669D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WORKFLOW_TUBES_KPL_ERGOLAB.Testing", "..\WORKFLOW_TUBES_KPL_ERGOLAB.Testing\WORKFLOW_TUBES_KPL_ERGOLAB.Testing.csproj", "{3A06AD45-7552-4329-89C8-6CD490D54816}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{FB4DBBBD-68C9-A920-ED97-3C5F23F7989D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB4DBBBD-68C9-A920-ED97-3C5F23F7989D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB4DBBBD-68C9-A920-ED97-3C5F23F7989D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4D1C4D1C-C3FE-47C5-A292-4715DC9669D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4D1C4D1C-C3FE-47C5-A292-4715DC9669D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4D1C4D1C-C3FE-47C5-A292-4715DC9669D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4D1C4D1C-C3FE-47C5-A292-4715DC9669D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A06AD45-7552-4329-89C8-6CD490D54816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A06AD45-7552-4329-89C8-6CD490D54816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A06AD45-7552-4329-89C8-6CD490D54816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A06AD45-7552-4329-89C8-6CD490D54816}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
