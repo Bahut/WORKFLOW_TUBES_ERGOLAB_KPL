@@ -1,8 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using WORKFLOW_TUBES_KPL_ERGOLAB;
 using WORKFLOW_TUBES_KPL_ERGOLAB.Core;
+using WORKFLOW_TUBES_KPL_ERGOLAB.Data;
 using WORKFLOW_TUBES_KPL_ERGOLAB.Models;
 using WORKFLOW_TUBES_KPL_ERGOLAB.Testing;
-using WORKFLOW_TUBES_KPL_ERGOLAB.Data;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,18 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 
 var app = builder.Build();
+
+var categories =
+    ConfigLoader.Load<CategoryConfig>("categories.json");
+
+var roles =
+    ConfigLoader.Load<RoleConfig>("role_permission.json");
+
+var notifications =
+    ConfigLoader.Load<NotificationConfig>("notification_templates.json");
+
+var sla =
+    ConfigLoader.Load<SlaConfig>("sla_rules.json");
 
 if (app.Environment.IsDevelopment())
 {

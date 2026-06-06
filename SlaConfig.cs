@@ -1,0 +1,14 @@
+﻿namespace WORKFLOW_TUBES_KPL_ERGOLAB
+{
+    public class SlaConfig
+    {
+        public List<SlaRule> Rules { get; set; }
+    }
+
+    public class SlaRule
+    {
+        public string Category { get; set; }
+        public string Impact { get; set; }
+        public int MaxDays { get; set; }
+    }
+}
