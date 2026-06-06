@@ -12,7 +12,6 @@ namespace WORKFLOW_TUBES_KPL_ERGOLAB.Testing
 		[TestMethod]
 		public void Result_Ok_ReturnsSuccess()
 		{
-			// Ubah jadi 5 argumen
 			var complaint = new Complaint("Jalan rusak", "Infrastruktur", "Berlubang", "Bandung", "Budi");
 			var result = Result<Complaint>.Ok(complaint, "Berhasil");
 			Assert.IsTrue(result.Success);
@@ -47,7 +46,6 @@ namespace WORKFLOW_TUBES_KPL_ERGOLAB.Testing
 		{
 			var items = new List<Complaint>
 			{
-				// Ubah jadi 5 argumen
 				new Complaint("Sampah", "Kebersihan", "Menumpuk", "Surabaya", "Siti")
 			};
 			var paged = new PagedList<Complaint>(items, 1, 10, 1);
@@ -122,7 +120,6 @@ namespace WORKFLOW_TUBES_KPL_ERGOLAB.Testing
 		public void ComplaintRepository_AddAndGet_Works()
 		{
 			var repo = new ComplaintRepository();
-			// Ubah jadi 5 argumen
 			var c = new Complaint("Banjir", "Infrastruktur", "Meluap", "Jakarta", "Andi");
 			repo.Add(c);
 			var result = repo.GetById(0);
