@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using WORKFLOW_TUBES_KPL_ERGOLAB;
+using WORKFLOW_TUBES_KPL_ERGOLAB.Config;
 using WORKFLOW_TUBES_KPL_ERGOLAB.Core;
 using WORKFLOW_TUBES_KPL_ERGOLAB.Data;
 using WORKFLOW_TUBES_KPL_ERGOLAB.Models;
-using WORKFLOW_TUBES_KPL_ERGOLAB.Testing;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,9 +65,7 @@ Console.WriteLine($"Diserahkan Ke      : {unitTujuan}");
 Console.WriteLine($"Estimasi SLA       : {slaDays} Hari");
 
 Console.WriteLine("\n=== Menjalankan Performance Test ===");
-PerformanceTest.Run();
-GenericsPerformanceTest.Run();
-TableDrivenPerformanceTest.Run(); 
+app.Run(); 
 
 Console.WriteLine("\nSimulasi program selesai.\n");
 

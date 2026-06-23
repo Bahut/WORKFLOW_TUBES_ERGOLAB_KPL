@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WORKFLOW_TUBES_KPL_ERGOLAB.Config;
+using WORKFLOW_TUBES_KPL_ERGOLAB.Core;
 
 namespace WORKFLOW_TUBES_KPL_ERGOLAB.Controllers
 {
