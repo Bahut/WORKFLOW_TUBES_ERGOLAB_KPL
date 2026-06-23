@@ -3,49 +3,99 @@ using System.Collections.Generic;
 
 namespace WORKFLOW_TUBES_KPL_ERGOLAB.Core
 {
-    public class ComplaintSlaTable
+    public class RuleTable<T>
     {
-        // Hapus StringComparer dari constructor Dictionary Tuple
-        private readonly Dictionary<(string, string), string> assignmentMatrix = new Dictionary<(string, string), string>()
-        {
-            { ("infrastruktur", "berat"), "Unit Infrastruktur" },
-            { ("keamanan", "sedang"), "Unit Keamanan" }
-        };
+        private readonly Dictionary<(string, string), T> table =
+            new Dictionary<(string, string), T>();
 
-        private readonly Dictionary<(string, string), int> slaMatrix = new Dictionary<(string, string), int>()
+        public void Add(string category, string severity, T value)
         {
-            { ("keamanan", "sedang"), 1 },
-            { ("infrastruktur", "berat"), 3 }
-        };
-
-        public string CheckEscalation(ComplaintStatus status, int daysOverdue)
-        {
-            if (status == ComplaintStatus.Diverifikasi && daysOverdue >= 3)
-            {
-                return "Eskalasi ke Lurah";
-            }
-            return "Tim Operasional";
+            table[(category.ToLower(), severity.ToLower())] = value;
         }
 
-        public string GetNotificationTemplate(ComplaintStatus status, string recipient)
+        public T Get(string category, string severity, T defaultValue)
         {
-            if (status == ComplaintStatus.Diajukan && recipient.Equals("Warga", StringComparison.OrdinalIgnoreCase))
-            {
-                return "Halo Warga, laporan Anda telah diajukan.";
-            }
-            return string.Empty;
+            return table.TryGetValue(
+                (category.ToLower(), severity.ToLower()),
+                out T value)
+                ? value
+                : defaultValue;
+        }
+    }
+
+    public class ComplaintSlaTable
+    {
+        private readonly RuleTable<string> assignmentMatrix =
+            new RuleTable<string>();
+
+        private readonly RuleTable<int> slaMatrix =
+            new RuleTable<int>();
+
+        public ComplaintSlaTable()
+        {
+            assignmentMatrix.Add(
+                "infrastruktur",
+                "berat",
+                "Unit Infrastruktur");
+
+            assignmentMatrix.Add(
+                "keamanan",
+                "sedang",
+                "Unit Keamanan");
+
+            slaMatrix.Add(
+                "keamanan",
+                "sedang",
+                1);
+
+            slaMatrix.Add(
+                "infrastruktur",
+                "berat",
+                3);
         }
 
         public string GetUnit(string category, string severity)
         {
-            var key = (category?.ToLower() ?? "", severity?.ToLower() ?? "");
-            return assignmentMatrix.TryGetValue(key, out string? unit) ? unit : "Unit Umum";
+            return assignmentMatrix.Get(
+                category,
+                severity,
+                "Unit Umum");
         }
 
         public int GetSLADays(string category, string severity)
         {
-            var key = (category?.ToLower() ?? "", severity?.ToLower() ?? "");
-            return slaMatrix.TryGetValue(key, out int days) ? days : 7;
+            return slaMatrix.Get(
+                category,
+                severity,
+                7);
+        }
+
+        public string CheckEscalation(
+            ComplaintStatus status,
+            int daysOverdue)
+        {
+            if (status == ComplaintStatus.Diverifikasi &&
+                daysOverdue >= 3)
+            {
+                return "Eskalasi ke Lurah";
+            }
+
+            return "Tim Operasional";
+        }
+
+        public string GetNotificationTemplate(
+            ComplaintStatus status,
+            string recipient)
+        {
+            if (status == ComplaintStatus.Diajukan &&
+                recipient.Equals(
+                    "Warga",
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                return "Halo Warga, laporan Anda telah diajukan.";
+            }
+
+            return string.Empty;
         }
     }
 }
