@@ -39,7 +39,7 @@ namespace WORKFLOW_TUBES_KPL_ERGOLAB.Controllers
         {
             _context.Complaints.Add(complaint);
             await _context.SaveChangesAsync();
-
+                
             return Ok(new { message = "Data berhasil masuk Supabase, pren!", data = complaint });
         }
 

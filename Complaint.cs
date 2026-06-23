@@ -7,11 +7,11 @@ namespace WORKFLOW_TUBES_KPL_ERGOLAB.Models
     {
         public int Id { get; set; }
 
-        public string Title { get; private set; }
-        public string Category { get; private set; }
-        public string Description { get; private set; }
-        public string Location { get; private set; }
-        public string Reporter { get; private set; }
+        public string Title { get; set; }
+        public string Category { get; set; }
+        public string Description { get; set; }
+        public string Location { get; set; }
+        public string Reporter { get; set; }
 
         public ComplaintStatus Status { get; set; }
 
