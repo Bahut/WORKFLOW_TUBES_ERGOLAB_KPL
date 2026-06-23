@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WORKFLOW_TUBES_KPL_ERGOLAB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e00fde22bed7e739d03a354180d1afb6eb9eef76")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9dba8f7895a7728a29d2a402d0403b3b091ef5c0")]
 [assembly: System.Reflection.AssemblyProductAttribute("WORKFLOW_TUBES_KPL_ERGOLAB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WORKFLOW_TUBES_KPL_ERGOLAB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
