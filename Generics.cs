@@ -5,6 +5,7 @@ using WORKFLOW_TUBES_KPL_ERGOLAB.Models;
 
 namespace WORKFLOW_TUBES_KPL_ERGOLAB.Core
 {
+    // Membungkus hasil operasi agar konsisten
     public class Result<T>
     {
         public bool Success { get; private set; }
@@ -21,18 +22,21 @@ namespace WORKFLOW_TUBES_KPL_ERGOLAB.Core
         public static Result<T> Ok(T data, string message = "")
         {
             if (data == null)
-                throw new ArgumentNullException(nameof(data), "Data tidak boleh null");
+                throw new ArgumentNullException(nameof(data), "Data tidak boleh null.");
+
             return new Result<T>(true, data, message);
         }
 
         public static Result<T> Fail(string message)
         {
             if (string.IsNullOrWhiteSpace(message))
-                throw new ArgumentException("Pesan error tidak boleh kosong");
+                throw new ArgumentException("Pesan error tidak boleh kosong.", nameof(message));
+
             return new Result<T>(false, default, message);
         }
     }
 
+    // Menyimpan data dalam bentuk pagination
     public class PagedList<T>
     {
         public int Page { get; private set; }
@@ -43,13 +47,16 @@ namespace WORKFLOW_TUBES_KPL_ERGOLAB.Core
         public PagedList(List<T> items, int page, int size, int total)
         {
             if (items == null)
-                throw new ArgumentNullException(nameof(items));
+                throw new ArgumentNullException(nameof(items), "Items tidak boleh null.");
+
             if (page < 1)
-                throw new ArgumentOutOfRangeException(nameof(page), "Page minimal 1");
+                throw new ArgumentOutOfRangeException(nameof(page), "Page minimal 1.");
+
             if (size < 1)
-                throw new ArgumentOutOfRangeException(nameof(size), "Size minimal 1");
+                throw new ArgumentOutOfRangeException(nameof(size), "Size minimal 1.");
+
             if (total < 0)
-                throw new ArgumentOutOfRangeException(nameof(total), "Total tidak boleh negatif");
+                throw new ArgumentOutOfRangeException(nameof(total), "Total tidak boleh negatif.");
 
             Items = items;
             Page = page;
@@ -58,16 +65,19 @@ namespace WORKFLOW_TUBES_KPL_ERGOLAB.Core
         }
     }
 
+    // Delegate generic untuk event
     public delegate void EventHandler<T>(T data, string eventName);
 
+    // Repository generic dasar
     public abstract class Repository<T>
     {
-        protected List<T> storage = new List<T>();
+        protected readonly List<T> storage = new();
 
         public virtual void Add(T item)
         {
             if (item == null)
-                throw new ArgumentNullException(nameof(item), "Item tidak boleh null");
+                throw new ArgumentNullException(nameof(item), "Item tidak boleh null.");
+
             storage.Add(item);
         }
 
@@ -79,39 +89,48 @@ namespace WORKFLOW_TUBES_KPL_ERGOLAB.Core
         public abstract T GetById(int id);
     }
 
+    // Kerangka validasi generic
     public abstract class ValidationRule<T>
     {
         public abstract bool Validate(T input, out string errorMessage);
 
-        public bool ValidateAll(T input, List<ValidationRule<T>> rules, out List<string> errors)
+        public bool ValidateAll(
+            T input,
+            List<ValidationRule<T>> rules,
+            out List<string> errors)
         {
             if (rules == null)
-                throw new ArgumentNullException(nameof(rules));
+                throw new ArgumentNullException(nameof(rules), "Daftar rule tidak boleh null.");
 
             errors = new List<string>();
+
             foreach (var rule in rules)
             {
-                if (!rule.Validate(input, out string msg))
-                    errors.Add(msg);
+                if (!rule.Validate(input, out var message))
+                    errors.Add(message);
             }
+
             return errors.Count == 0;
         }
     }
 
+    // Validasi field wajib diisi
     public class RequiredStringRule : ValidationRule<string>
     {
         public override bool Validate(string input, out string errorMessage)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
-                errorMessage = "Field wajib diisi";
+                errorMessage = "Field wajib diisi.";
                 return false;
             }
-            errorMessage = "";
+
+            errorMessage = string.Empty;
             return true;
         }
     }
 
+    // Validasi panjang maksimum karakter
     public class MaxLengthRule : ValidationRule<string>
     {
         private readonly int maxLength;
@@ -119,7 +138,10 @@ namespace WORKFLOW_TUBES_KPL_ERGOLAB.Core
         public MaxLengthRule(int maxLength)
         {
             if (maxLength <= 0)
-                throw new ArgumentOutOfRangeException(nameof(maxLength), "MaxLength harus lebih dari 0");
+                throw new ArgumentOutOfRangeException(
+                    nameof(maxLength),
+                    "MaxLength harus lebih dari 0.");
+
             this.maxLength = maxLength;
         }
 
@@ -127,36 +149,48 @@ namespace WORKFLOW_TUBES_KPL_ERGOLAB.Core
         {
             if (input != null && input.Length > maxLength)
             {
-                errorMessage = $"Panjang maksimal adalah {maxLength} karakter";
+                errorMessage = $"Panjang maksimal adalah {maxLength} karakter.";
                 return false;
             }
-            errorMessage = "";
+
+            errorMessage = string.Empty;
             return true;
         }
     }
 
-    public class EnumValueRule<TEnum> : ValidationRule<string> where TEnum : struct, Enum
+    // Validasi nilai enum
+    public class EnumValueRule<TEnum> : ValidationRule<string>
+        where TEnum : struct, Enum
     {
         public override bool Validate(string input, out string errorMessage)
         {
             if (!Enum.TryParse<TEnum>(input, true, out _))
             {
-                errorMessage = $"Nilai '{input}' tidak valid untuk tipe {typeof(TEnum).Name}";
+                errorMessage =
+                    $"Nilai '{input}' tidak valid untuk tipe {typeof(TEnum).Name}.";
                 return false;
             }
-            errorMessage = "";
+
+            errorMessage = string.Empty;
             return true;
         }
     }
 
+    // Repository khusus Complaint
     public class ComplaintRepository : Repository<Complaint>
     {
         public override Complaint GetById(int id)
         {
             if (id < 0)
-                throw new ArgumentOutOfRangeException(nameof(id), "Id tidak boleh negatif");
+                throw new ArgumentOutOfRangeException(
+                    nameof(id),
+                    "Id tidak boleh negatif.");
+
             if (id >= storage.Count)
-                throw new ArgumentOutOfRangeException(nameof(id), "Id melebihi jumlah data");
+                throw new ArgumentOutOfRangeException(
+                    nameof(id),
+                    "Id melebihi jumlah data.");
+
             return storage[id];
         }
     }
