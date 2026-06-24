@@ -11,19 +11,43 @@ namespace WORKFLOW_TUBES_KPL_ERGOLAB.Controllers
         [HttpGet("categories")]
         public IActionResult GetCategories()
         {
-            var data =
-                ConfigLoader.Load<CategoryConfig>("categories.json");
+            try
+            {
+                var data =
+                    ConfigLoader.Load<CategoryConfig>(
+                        "categories.json");
 
-            return Ok(data);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    new
+                    {
+                        message = ex.Message
+                    });
+            }
         }
 
         [HttpGet("sla")]
         public IActionResult GetSlaRules()
         {
-            var data =
-                ConfigLoader.Load<SlaConfig>("sla_rules.json");
+            try
+            {
+                var config = ConfigLoader.Load<SlaConfig>("sla_rules.json");
 
-            return Ok(data);
+                ConfigValidator.Validate(config);
+
+                return Ok(config);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
         }
 
         [HttpGet("roles")]
