@@ -4,37 +4,62 @@ namespace WORKFLOW_TUBES_KPL_ERGOLAB.Config
 {
     public static class ConfigLoader
     {
+        private static readonly JsonSerializerOptions Options =
+            new()
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
         public static T Load<T>(string filePath)
         {
-            string fullPath = Path.IsPathRooted(filePath)
-                ? filePath
-                : Path.GetFullPath(
-                    Path.Combine(
-                        AppDomain.CurrentDomain.BaseDirectory,
-                        filePath));
+            if (string.IsNullOrWhiteSpace(filePath))
+                throw new ArgumentException(
+                    "Path konfigurasi tidak boleh kosong");
+
+            string fullPath = Path.GetFullPath(filePath);
 
             if (!File.Exists(fullPath))
-            {
                 throw new FileNotFoundException(
-                    $"Config file tidak ditemukan: {fullPath}");
-            }
+                    $"File konfigurasi tidak ditemukan: {fullPath}");
 
-            string json = File.ReadAllText(fullPath);
-
-            T? result = JsonSerializer.Deserialize<T>(
-                json,
-                new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
-
-            if (result == null)
+            try
             {
-                throw new Exception(
-                    $"Gagal membaca konfigurasi: {fullPath}");
-            }
+                using FileStream stream =
+                    File.OpenRead(fullPath);
 
-            return result;
+                T? result =
+                    JsonSerializer.Deserialize<T>(
+                        stream,
+                        Options);
+
+                if (result == null)
+                    throw new InvalidOperationException(
+                        $"Isi konfigurasi {filePath} tidak valid");
+
+                ValidateConfig(result);
+
+                return result;
+            }
+            catch (JsonException ex)
+            {
+                throw new InvalidOperationException(
+                    $"Format JSON tidak valid pada {filePath}",
+                    ex);
+            }
+        }
+
+        private static void ValidateConfig<T>(T config)
+        {
+            switch (config)
+            {
+                case CategoryConfig categoryConfig:
+                    ConfigValidator.Validate(categoryConfig);
+                    break;
+
+                case SlaConfig slaConfig:
+                    ConfigValidator.Validate(slaConfig);
+                    break;
+            }
         }
     }
 }
